@@ -3,7 +3,11 @@
 $config = $serverState['octaneConfig'];
 
 try {
-    $server = new Swoole\Http\Server(
+    $enableWebSocket = $config['websocket']['enable'];
+
+    $serverClass = $enableWebSocket ? Swoole\Websocket\Server::class : Swoole\Http\Server::class;
+
+    $server = new $serverClass(
         $serverState['host'] ?? '127.0.0.1',
         $serverState['port'] ?? 8080,
         $serverState['mode'] ?? SWOOLE_PROCESS,

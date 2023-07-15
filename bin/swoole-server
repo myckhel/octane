@@ -68,6 +68,39 @@ $server->on('managerstart', function () use ($serverState) {
 
 /*
 |--------------------------------------------------------------------------
+| Handle Websocket Events
+|--------------------------------------------------------------------------
+|
+| The following callbacks manage websocket events when enabled
+|
+*/
+
+if ($serverState['octaneConfig']['server'] === 'swoole' && $serverState['octaneConfig']['websocket']['enable']) {
+    static $handler = null;
+
+    $server->on('Open', function ($server, $request) use (&$handler, $serverState) {
+        if ($handler === null) {
+            $handler = new $serverState['octaneConfig']['websocket']['handler']($server);
+        }
+
+        $handler?->onOpen($request);
+    });
+
+    $server->on('Message', function ($server, $frame) use (&$handler) {
+        $handler?->onMessage($frame);
+    });
+
+    $server->on('Close', function ($server, $fd, $reactorId) use (&$handler) {
+        $clientInfo = $server->getClientInfo($fd);
+        if (isset($clientInfo['websocket_status']) && $clientInfo['websocket_status'] === \WEBSOCKET_STATUS_FRAME) {
+            $handler?->onClose($fd, $reactorId);
+        }
+        // else ignore the close event for http server
+    });
+}
+
+/*
+|--------------------------------------------------------------------------
 | Handle Worker Start
 |--------------------------------------------------------------------------
 |

@@ -20,6 +20,7 @@ use Laravel\Octane\Listeners\FlushUploadedFiles;
 use Laravel\Octane\Listeners\ReportException;
 use Laravel\Octane\Listeners\StopWorkerIfNecessary;
 use Laravel\Octane\Octane;
+use Laravel\Octane\Swoole\Socket\WebSocketService;
 
 return [
 
@@ -50,6 +51,22 @@ return [
     */
 
     'https' => env('OCTANE_HTTPS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Enable Websocket Server
+    |--------------------------------------------------------------------------
+    |
+    | When this configuration value is set to "true", Octane will inform the
+    | framework to enable websocket server
+    |
+    */
+
+    'websocket' => [
+        'enable'  => env('OCTANE_WEBSOCKET', false), // Note: set enable to true
+        'handler' => WebSocketService::class,
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
