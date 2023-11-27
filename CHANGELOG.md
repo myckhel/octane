@@ -1,6 +1,33 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/octane/compare/v2.0.2...2.x)
+## [Unreleased](https://github.com/laravel/octane/compare/v2.1.1...2.x)
+
+## [v2.1.1](https://github.com/laravel/octane/compare/v2.1.0...v2.1.1) - 2023-10-18
+
+- Fix swoole host only configurable via --host parameter + incorrect default port by [@xorinzor](https://github.com/xorinzor) in https://github.com/laravel/octane/pull/762
+
+## [v2.1.0](https://github.com/laravel/octane/compare/v2.0.6...v2.1.0) - 2023-10-06
+
+- Adds Herd support by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/octane/pull/743
+
+## [v2.0.6](https://github.com/laravel/octane/compare/v2.0.5...v2.0.6) - 2023-08-29
+
+- Fix passing invalid connection session id to `Swoole\Http\Response::create()` by [@smortexa](https://github.com/smortexa) in https://github.com/laravel/octane/pull/737
+- Fix missing mode config by [@sy-records](https://github.com/sy-records) in https://github.com/laravel/octane/pull/740
+- Add “raw” type in handleStream method for custom json in stdout by [@mphamid](https://github.com/mphamid) in https://github.com/laravel/octane/pull/742
+
+## [v2.0.5](https://github.com/laravel/octane/compare/v2.0.4...v2.0.5) - 2023-08-08
+
+- Add IPv6 support for Swoole by [@xorinzor](https://github.com/xorinzor) in https://github.com/laravel/octane/pull/728
+
+## [v2.0.4](https://github.com/laravel/octane/compare/v2.0.3...v2.0.4) - 2023-08-02
+
+- [2.x] Fixes installation when using Herd by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/octane/pull/726
+
+## [v2.0.3](https://github.com/laravel/octane/compare/v2.0.2...v2.0.3) - 2023-07-20
+
+- Fixes "Incorrect header size" by [@nunomaduro](https://github.com/nunomaduro) in https://github.com/laravel/octane/pull/719
+- Fix handleSignal deprecation warning by [@sy-records](https://github.com/sy-records) in https://github.com/laravel/octane/pull/722
 
 ## [v2.0.2](https://github.com/laravel/octane/compare/v2.0.1...v2.0.2) - 2023-06-21
 

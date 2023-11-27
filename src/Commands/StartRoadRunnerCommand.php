@@ -13,8 +13,8 @@ use Symfony\Component\Process\Process;
 class StartRoadRunnerCommand extends Command implements SignalableCommandInterface
 {
     use Concerns\InstallsRoadRunnerDependencies,
-        Concerns\InteractsWithServers,
-        Concerns\InteractsWithEnvironmentVariables;
+        Concerns\InteractsWithEnvironmentVariables,
+        Concerns\InteractsWithServers;
 
     /**
      * The command's signature.
@@ -22,7 +22,7 @@ class StartRoadRunnerCommand extends Command implements SignalableCommandInterfa
      * @var string
      */
     public $signature = 'octane:roadrunner
-                    {--host=127.0.0.1 : The IP address the server should bind to}
+                    {--host= : The IP address the server should bind to}
                     {--port= : The port the server should be available on}
                     {--rpc-host= : The RPC IP address the server should bind to}
                     {--rpc-port= : The RPC port the server should be available on}
@@ -79,7 +79,7 @@ class StartRoadRunnerCommand extends Command implements SignalableCommandInterfa
             '-c', $this->configPath(),
             '-o', 'version=3',
             '-o', 'http.address='.$this->option('host').':'.$this->getPort(),
-            '-o', 'server.command='.(new PhpExecutableFinder)->find().' '.base_path(config('octane.roadrunner.command', 'vendor/bin/roadrunner-worker')),
+            '-o', 'server.command='.(new PhpExecutableFinder)->find().','.base_path(config('octane.roadrunner.command', 'vendor/bin/roadrunner-worker')),
             '-o', 'http.pool.num_workers='.$this->workerCount(),
             '-o', 'http.pool.max_jobs='.$this->option('max-requests'),
             '-o', 'rpc.listen=tcp://'.$this->rpcHost().':'.$this->rpcPort(),
